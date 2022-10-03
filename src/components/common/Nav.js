@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
 
 
-const Nav = () => {
+function Nav() {
 
   return (
     <nav>
       <div>
         <Link to="/">Home</Link>
-        <Link to="/products">Products</Link>
+        <Link to="/shop">Products</Link>
       </div>
     </nav>
   )
