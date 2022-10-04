@@ -1,6 +1,7 @@
+import '../../styles/ProductIndex.scss'
+
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import '../styles/ProductIndex.scss'
 
 function ProductIndex() {
   const [products, setProducts] = useState([])
@@ -9,9 +10,9 @@ function ProductIndex() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(`/api/shop/`)
-        console.log(res.data)
-        setProducts(res.data)
+        const { data } = await axios.get(`/api/shop/`)
+        console.log(data)
+        setProducts(data)
       } catch (err) {
         console.log(err)
       }
