@@ -5,6 +5,8 @@ import Home from './components/common/Home'
 import ProductIndex from './components/products/ProductIndex';
 import ProductShow from './components/products/ProductShow';
 
+import './styles/App.css'
+
 function App() {
   return (
     <BrowserRouter>

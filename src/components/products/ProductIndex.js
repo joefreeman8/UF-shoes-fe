@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Container, Grid } from '@mui/material'
+import ProductCard from './ProductCard'
 
 function ProductIndex() {
   const [products, setProducts] = useState([])
@@ -24,21 +26,21 @@ function ProductIndex() {
   }, [])
 
   return (
-    <>
+    <Container maxWidth="lg">
       <h1>Products</h1>
-      <div>
-        {products.map(product => (
-          <div key={product._id}>
-            <Link to={`/shop/${product._id}`} >
-              <h2>{product.name}</h2>
-              <p>{product.type}</p>
-              <img src={product.image} alt={product.name} />
-              <p>£{product.price}</p>
-            </Link>
-          </div>
+      <Grid container spacing={4}>
+        {products?.map(product => (
+          <Grid item xs={4} key={product._id}>
+            <ProductCard
+              name={product.name}
+              image={product.image}
+              price={product.price}
+              id={product._id}
+            />
+          </Grid>
         ))}
-      </div>
-    </>
+      </Grid>
+    </Container>
   )
 }
 

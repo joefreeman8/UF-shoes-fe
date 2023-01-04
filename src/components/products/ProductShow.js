@@ -29,13 +29,13 @@ function ProductShow() {
       <div>
         {product && (
           <div key={product._id}>
-            <h2>{product.name}</h2>
-            <p>{product.type}</p>
-            <img src={product.image} alt={product.name} />
-            <p>£{product.price}</p>
+            <h2>{product?.name}</h2>
+            <p>{product?.type}</p>
+            <img src={product?.image} alt={product.name} />
+            <p>£{product?.price}</p>
             <div>
               <h4>Comments</h4>
-              {product.comments.map(comment => (
+              {product?.comments.map(comment => (
                 <div key={comment._id} >
                   <p><strong>{comment.text}</strong></p>
                   <p><strong>{comment.rating}</strong></p>
