@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Box, Button, CardActions, CardContent, Container, Typography } from "@mui/material"
 
 import '../../styles/ProductShow.scss'
@@ -37,9 +37,9 @@ function ProductShow() {
           <Typography variant='h3' component='p'>
             {singleProduct?.name}
           </Typography>
-          <Typography>
+          <Typography variant='h4' component='p'>
             £ {singleProduct?.price}
-          </Typography>
+          </Typography >
         </CardContent>
         <CardActions>
           <Button size="small" onClick={goToIndex}>back to shop</Button>
