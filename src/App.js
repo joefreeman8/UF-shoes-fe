@@ -5,8 +5,11 @@ import Home from './components/common/Home'
 import ProductIndex from './components/products/ProductIndex';
 import ProductShow from './components/products/ProductShow';
 import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 import './styles/App.css'
+
+window.Buffer = window.Buffer || require('buffer').Buffer
 
 function App() {
   return (
@@ -17,6 +20,7 @@ function App() {
         <Route path="/shop/:productId" element={<ProductShow />} />
         <Route path="/shop" element={<ProductIndex />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   )
