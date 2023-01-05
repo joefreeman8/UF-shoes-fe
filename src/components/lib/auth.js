@@ -6,6 +6,10 @@ const getToken = () => {
   return localStorage.getItem('token')
 }
 
+const logout = () => {
+  return localStorage.removeItem('token')
+}
+
 const getPayload = () => {
   const token = getToken()
   if (!token) {
@@ -21,5 +25,6 @@ const getPayload = () => {
 export const AUTH = {
   setToken,
   getToken,
-  getPayload
+  getPayload,
+  logout
 }
