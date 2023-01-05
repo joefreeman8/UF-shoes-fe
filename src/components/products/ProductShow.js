@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react"
-import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
-import { Box, Button, CardActions, CardContent, Container, Typography } from "@mui/material"
+import {
+  Box,
+  Button,
+  CardActions,
+  CardContent,
+  Container,
+  Typography
+} from "@mui/material"
 
+import { API } from "../lib/api"
 import '../../styles/ProductShow.scss'
 
 
@@ -12,16 +19,13 @@ function ProductShow() {
   const [singleProduct, setSingleProduct] = useState(null)
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const { data } = await axios.get(`/api/shop/${productId}`)
+    API.GET(API.ENDPOINTS.singleProduct(productId))
+      .then(({ data }) => {
         setSingleProduct(data)
-        console.log({ data })
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getData()
+      })
+      .catch(({ message, response }) => {
+        console.log(message, response)
+      })
   }, [productId])
 
   const goToIndex = () => navigate('/shop')

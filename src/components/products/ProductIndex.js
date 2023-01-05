@@ -1,10 +1,9 @@
-import '../../styles/ProductIndex.scss'
-
-
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Container, Grid } from '@mui/material'
+
 import ProductCard from './ProductCard'
+import { API } from '../lib/api'
+import '../../styles/ProductIndex.scss'
 
 function ProductIndex() {
   const [products, setProducts] = useState([])
@@ -13,7 +12,7 @@ function ProductIndex() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(`/api/shop/`)
+        const { data } = await API.GET(API.ENDPOINTS.allProducts)
         console.log(data)
         setProducts(data)
       } catch (err) {
