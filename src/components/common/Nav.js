@@ -164,9 +164,27 @@ function Nav() {
                   shop
                 </Typography>
               </Link>
-            </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            </Box>
+            <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+              <Link className='link' to='/register' >
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{
+                    mr: 2,
+                    display: { xs: 'none', md: 'flex' },
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.05rem',
+                    color: 'white',
+                    alignItem: 'center'
+                  }}
+                >
+                  register
+                </Typography>
+              </Link>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />

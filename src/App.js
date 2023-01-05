@@ -4,6 +4,7 @@ import Nav from './components/common/Nav';
 import Home from './components/common/Home'
 import ProductIndex from './components/products/ProductIndex';
 import ProductShow from './components/products/ProductShow';
+import Register from './components/auth/Register';
 
 import './styles/App.css'
 
@@ -13,8 +14,9 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<ProductIndex />} />
         <Route path="/shop/:productId" element={<ProductShow />} />
+        <Route path="/shop" element={<ProductIndex />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   )
