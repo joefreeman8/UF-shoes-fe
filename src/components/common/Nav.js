@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Link } from "react-router-dom"
 import {
   AppBar,
   Box,
@@ -8,17 +6,19 @@ import {
   Typography,
   Menu,
   Container,
-  Avatar,
-  Tooltip,
   MenuItem,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 
-import '../../styles/Nav.scss'
+import { useState } from 'react'
+import { Link, useNavigate } from "react-router-dom"
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { useAuthenticated } from '../hooks/useAuthenticated';
+import '../../styles/Nav.scss'
+import { AUTH } from '../lib/auth';
+
 
 const darkTheme = createTheme({
   palette: {
@@ -30,23 +30,25 @@ const darkTheme = createTheme({
 });
 
 function Nav() {
+  const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useAuthenticated()
+
+  const logout = () => {
+    AUTH.logout()
+    setIsLoggedIn(false)
+    navigate('/')
+  }
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -166,75 +168,72 @@ function Nav() {
               </Link>
 
             </Box>
-            <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-              <Link className='link' to='/register' >
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'monospace',
-                    fontWeight: 700,
-                    letterSpacing: '.05rem',
-                    color: 'white',
-                    alignItem: 'center'
-                  }}
-                >
-                  register
-                </Typography>
-              </Link>
-              <Link className='link' to='/login' >
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'monospace',
-                    fontWeight: 700,
-                    letterSpacing: '.05rem',
-                    color: 'white',
-                    alignItem: 'center'
-                  }}
-                >
-                  login
-                </Typography>
-              </Link>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+            {isLoggedIn ? (
+              <>
+                <Link className='link' to='/' onClick={logout}>
+                  <Typography
+                    variant="h6"
+                    color="inherit"
+                    component="div"
+                    sx={{
+                      mr: 2,
+                      display: { xs: 'none', md: 'flex' },
+                      fontFamily: 'monospace',
+                      fontWeight: 700,
+                      letterSpacing: '.05rem',
+                      color: 'white',
+                      alignItem: 'center'
+                    }}
+                  >
+                    logout
+                  </Typography>
+                </Link>
+              </>
+            ) : (
+              <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                <Link className='link' to='/register' >
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{
+                      mr: 2,
+                      display: { xs: 'none', md: 'flex' },
+                      fontFamily: 'monospace',
+                      fontWeight: 700,
+                      letterSpacing: '.05rem',
+                      color: 'white',
+                      alignItem: 'center'
+                    }}
+                  >
+                    register
+                  </Typography>
+                </Link>
+                <Link className='link' to='/login' >
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{
+                      mr: 2,
+                      display: { xs: 'none', md: 'flex' },
+                      fontFamily: 'monospace',
+                      fontWeight: 700,
+                      letterSpacing: '.05rem',
+                      color: 'white',
+                      alignItem: 'center'
+                    }}
+                  >
+                    login
+                  </Typography>
+                </Link>
+              </Box>
+            )
+            }
           </Toolbar>
         </Container>
       </AppBar>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 
