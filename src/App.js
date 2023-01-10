@@ -6,6 +6,7 @@ import ProductIndex from './components/products/ProductIndex';
 import ProductShow from './components/products/ProductShow';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import ReviewProduct from './components/reviews/ReviewProduct';
 
 import './styles/App.css'
 
@@ -17,7 +18,8 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shop/:productId" element={<ProductShow />} />
+        <Route path="/shop/:id/reviews" element={<ReviewProduct />} />
+        <Route path="/shop/:id" element={<ProductShow />} />
         <Route path="/shop" element={<ProductIndex />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

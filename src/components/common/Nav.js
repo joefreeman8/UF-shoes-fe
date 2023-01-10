@@ -9,7 +9,6 @@ import {
   MenuItem,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 import { useState } from 'react'
@@ -55,7 +54,6 @@ function Nav() {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Link className='link' to="/">
               <Typography
                 variant="h6"
@@ -128,7 +126,6 @@ function Nav() {
                 </MenuItem>
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
               variant="h6"
               noWrap

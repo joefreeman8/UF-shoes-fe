@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import {
   Box,
   Button,
@@ -11,22 +11,24 @@ import {
 
 import { API } from "../lib/api"
 import '../../styles/ProductShow.scss'
+import { useAuthenticated } from "../hooks/useAuthenticated"
 
 
 function ProductShow() {
   const navigate = useNavigate()
-  const { productId } = useParams()
+  const { id } = useParams()
   const [singleProduct, setSingleProduct] = useState(null)
+  const [isLoggedIn] = useAuthenticated()
 
   useEffect(() => {
-    API.GET(API.ENDPOINTS.singleProduct(productId))
+    API.GET(API.ENDPOINTS.singleProduct(id))
       .then(({ data }) => {
         setSingleProduct(data)
       })
       .catch(({ message, response }) => {
         console.log(message, response)
       })
-  }, [productId])
+  }, [id])
 
   const goToIndex = () => navigate('/shop')
 
@@ -47,7 +49,11 @@ function ProductShow() {
         </CardContent>
         <CardActions>
           <Button size="small" onClick={goToIndex}>back to shop</Button>
-          <Button size="small">review</Button>
+          {isLoggedIn && (
+            <Link to={`/shop/${singleProduct?._id}/reviews`}>
+              <Button size="small">review</Button>
+            </Link>
+          )}
           <Button size="small">Add to Cart</Button>
         </CardActions>
       </Box>
