@@ -4,7 +4,8 @@ import { AUTH } from './auth'
 const ENDPOINTS = {
   allProducts: '/api/shop',
   singleProduct: (id) => `/api/shop/${id}`,
-  createReview: (productId) => `/api/shop/${productId}/reviews`,
+  createReview: (id) => `/api/shop/${id}/reviews`,
+  singleReview: (productId, reviewId) => `/api/shop/${productId}/reviews/${reviewId}`,
 
   register: '/api/register',
   login: '/api/login'
@@ -22,4 +23,8 @@ const GET = (endpoint) => axios.get(endpoint)
 const POST = (endpoint, body, headers) =>
   headers ? axios.post(endpoint, body, headers) : axios.post(endpoint, body)
 
-export const API = { GET, POST, ENDPOINTS, getHeaders }
+const PUT = (endpoint, body, headers) => axios.put(endpoint, body, headers)
+
+const DELETE = (endpoint, headers) => axios.delete(endpoint, headers)
+
+export const API = { GET, POST, PUT, DELETE, ENDPOINTS, getHeaders }

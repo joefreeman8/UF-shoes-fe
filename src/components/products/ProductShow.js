@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import {
   Box,
@@ -10,6 +10,7 @@ import {
 } from "@mui/material"
 
 import { API } from "../lib/api"
+import { AUTH } from "../lib/auth"
 import '../../styles/ProductShow.scss'
 import { useAuthenticated } from "../hooks/useAuthenticated"
 import ReviewCard from "../reviews/ReviewCard"
@@ -19,6 +20,7 @@ function ProductShow() {
   const navigate = useNavigate()
   const { id } = useParams()
   const [singleProduct, setSingleProduct] = useState(null)
+  const [isUpdated, setIsUpdated] = useState(false)
   const [isLoggedIn] = useAuthenticated()
 
   useEffect(() => {
@@ -29,10 +31,16 @@ function ProductShow() {
       .catch(({ message, response }) => {
         console.log(message, response)
       })
-  }, [id])
+    setIsUpdated(false)
+  }, [id, isUpdated])
 
   const goToIndex = () => navigate('/shop')
 
+  const userHasReviewed = useMemo(() => {
+    return singleProduct?.reviews
+      .map((review) => review.addedBy._id)
+      .some((id) => console.log('does this work', AUTH.isOwner(id)))
+  }, [singleProduct])
 
   return (
     <>
@@ -51,11 +59,12 @@ function ProductShow() {
           </CardContent>
           <CardActions>
             <Button size="small" onClick={goToIndex}>back to shop</Button>
-            {isLoggedIn && (
-              <Link to={`/shop/${singleProduct?._id}/reviews`}>
-                <Button size="small">review</Button>
-              </Link>
-            )}
+            {isLoggedIn &&
+              !userHasReviewed && (
+                <Link to={`/shop/${singleProduct?._id}/reviews`}>
+                  <Button size="small">review</Button>
+                </Link>
+              )}
             <Button size="small">Add to Cart</Button>
           </CardActions>
         </Box>
@@ -69,6 +78,9 @@ function ProductShow() {
                 text={review.text}
                 rating={review.rating}
                 addedBy={review.addedBy.username}
+                reviewId={review._id}
+                productId={id}
+                setIsUpdated={setIsUpdated}
               />
             ))}
           </Box>

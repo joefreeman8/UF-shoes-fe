@@ -1,3 +1,4 @@
+
 const setToken = (token) => {
   localStorage.setItem('token', token)
 }
@@ -22,9 +23,15 @@ const getPayload = () => {
   return JSON.parse(Buffer.from(parts[1], 'base64'))
 }
 
+const isOwner = (objectId) => {
+  return objectId === getPayload().userId
+}
+
 export const AUTH = {
   setToken,
   getToken,
   getPayload,
-  logout
+  logout,
+  isOwner
 }
+
