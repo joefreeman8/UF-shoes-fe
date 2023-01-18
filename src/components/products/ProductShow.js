@@ -12,6 +12,7 @@ import {
 import { API } from "../lib/api"
 import '../../styles/ProductShow.scss'
 import { useAuthenticated } from "../hooks/useAuthenticated"
+import ReviewCard from "../reviews/ReviewCard"
 
 
 function ProductShow() {
@@ -63,11 +64,12 @@ function ProductShow() {
         <Container>
           <Box>
             {singleProduct?.reviews.map((review) => (
-              <div key={review._id}>
-                {review.text}
-                {review.rating}
-                {review.addedBy}
-              </div>
+              <ReviewCard
+                key={review._id}
+                text={review.text}
+                rating={review.rating}
+                addedBy={review.addedBy.username}
+              />
             ))}
           </Box>
         </Container>
