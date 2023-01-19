@@ -39,7 +39,7 @@ function ProductShow() {
   const userHasReviewed = useMemo(() => {
     return singleProduct?.reviews
       .map((review) => review.addedBy._id)
-      .some((id) => console.log('does this work', AUTH.isOwner(id)))
+      .some((id) => AUTH.isOwner(id))
   }, [singleProduct])
 
   return (
@@ -77,7 +77,7 @@ function ProductShow() {
                 key={review._id}
                 text={review.text}
                 rating={review.rating}
-                addedBy={review.addedBy.username}
+                addedBy={review.addedBy}
                 reviewId={review._id}
                 productId={id}
                 setIsUpdated={setIsUpdated}

@@ -28,6 +28,7 @@ export default function ReviewCard({
   const toggleEditMode = () => setIsEditMode(!isEditMode)
   const handleReviewTextChange = (e) => setReviewText(e.target.value)
 
+  console.log("auth-payload", AUTH.getPayload())
 
   const saveEditChanges = () => {
     if (text !== reviewText || rating !== reviewRating) {
@@ -72,7 +73,7 @@ export default function ReviewCard({
   return (
     <Card sx={{ minWidth: 275, mb: 3 }}>
       <CardContent>
-        <Typography>{addedBy}</Typography>
+        <Typography>{addedBy.username}</Typography>
         {isEditMode ? (
           <TextareaAutosize
             value={reviewText}

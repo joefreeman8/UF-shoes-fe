@@ -24,6 +24,7 @@ const getPayload = () => {
 }
 
 const isOwner = (objectId) => {
+  console.log("hello", getPayload())
   return objectId === getPayload().userId
 }
 
