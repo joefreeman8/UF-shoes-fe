@@ -28,8 +28,6 @@ export default function ReviewCard({
   const toggleEditMode = () => setIsEditMode(!isEditMode)
   const handleReviewTextChange = (e) => setReviewText(e.target.value)
 
-  console.log("auth-payload", AUTH.getPayload())
-
   const saveEditChanges = () => {
     if (text !== reviewText || rating !== reviewRating) {
       API.PUT(
