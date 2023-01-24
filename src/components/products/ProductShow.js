@@ -14,6 +14,7 @@ import { AUTH } from "../lib/auth"
 import '../../styles/ProductShow.scss'
 import { useAuthenticated } from "../hooks/useAuthenticated"
 import ReviewCard from "../reviews/ReviewCard"
+import ProductRatings from "./ProductRatings"
 
 
 function ProductShow() {
@@ -56,6 +57,9 @@ function ProductShow() {
             <Typography variant='h4' component='p'>
               £ {singleProduct?.price}
             </Typography >
+            <ProductRatings
+              rating={singleProduct?.avgRating}
+            />
           </CardContent>
           <CardActions>
             <Button size="small" onClick={goToIndex}>back to shop</Button>
