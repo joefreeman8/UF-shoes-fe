@@ -8,7 +8,8 @@ const ENDPOINTS = {
   singleReview: (productId, reviewId) => `/api/shop/${productId}/reviews/${reviewId}`,
 
   register: '/api/register',
-  login: '/api/login'
+  login: '/api/login',
+  basketItems: (userId) => `/api/basket/${userId}`
 }
 
 const getHeaders = () => ({

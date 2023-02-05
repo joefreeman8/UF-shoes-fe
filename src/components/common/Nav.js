@@ -32,6 +32,8 @@ function Nav() {
   const navigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useAuthenticated()
 
+  const { userId } = AUTH.getPayload()
+
   const logout = () => {
     AUTH.logout()
     setIsLoggedIn(false)
@@ -167,24 +169,46 @@ function Nav() {
             </Box>
             {isLoggedIn ? (
               <>
-                <Link className='link' to='/' onClick={logout}>
-                  <Typography
-                    variant="h6"
-                    color="inherit"
-                    component="div"
-                    sx={{
-                      mr: 2,
-                      display: { xs: 'none', md: 'flex' },
-                      fontFamily: 'monospace',
-                      fontWeight: 700,
-                      letterSpacing: '.05rem',
-                      color: 'white',
-                      alignItem: 'center'
-                    }}
-                  >
-                    logout
-                  </Typography>
-                </Link>
+                <Box>
+                  <Link className='link' to={`/basket/${userId}`}>
+                    <Typography
+                      variant="h6"
+                      color="inherit"
+                      component="div"
+                      sx={{
+                        mr: 2,
+                        display: { xs: 'none', md: 'flex' },
+                        fontFamily: 'monospace',
+                        fontWeight: 700,
+                        letterSpacing: '.05rem',
+                        color: 'white',
+                        alignItem: 'center'
+                      }}
+                    >
+                      basket
+                    </Typography>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link className='link' to='/' onClick={logout}>
+                    <Typography
+                      variant="h6"
+                      color="inherit"
+                      component="div"
+                      sx={{
+                        mr: 2,
+                        display: { xs: 'none', md: 'flex' },
+                        fontFamily: 'monospace',
+                        fontWeight: 700,
+                        letterSpacing: '.05rem',
+                        color: 'white',
+                        alignItem: 'center'
+                      }}
+                    >
+                      logout
+                    </Typography>
+                  </Link>
+                </Box>
               </>
             ) : (
               <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>

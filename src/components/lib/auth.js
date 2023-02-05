@@ -23,6 +23,7 @@ const getPayload = () => {
   return JSON.parse(Buffer.from(parts[1], 'base64'))
 }
 
+
 const isOwner = (objectId) => {
   return objectId === getPayload().userId
 }

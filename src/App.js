@@ -9,6 +9,7 @@ import Login from './components/auth/Login';
 import ReviewProduct from './components/reviews/ReviewProduct';
 
 import './styles/App.css'
+import Basket from './components/common/Basket';
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/shop" element={<ProductIndex />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/basket/:userId" element={<Basket />} />
       </Routes>
     </BrowserRouter>
   )
