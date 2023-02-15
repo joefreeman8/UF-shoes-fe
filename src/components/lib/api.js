@@ -9,6 +9,8 @@ const ENDPOINTS = {
 
   register: '/api/register',
   login: '/api/login',
+
+  addAndRemoveBasketItems: (id) => `/api/shop/${id}/basket`,
   basketItems: (userId) => `/api/basket/${userId}`
 }
 

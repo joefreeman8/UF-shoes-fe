@@ -25,15 +25,23 @@ function Basket() {
     <>
       {!!basket?.length && (
         <Container>
-          <Box>
+          <Card sx={{ maxWidth: 800 }}>
             {basket?.map((item) => (
-              <Card sx={{ minWidth: 275, mb: 3 }} key={item._id}>
+              <Box sx={{ maxWidth: 400, mb: 4 }} key={item._id}>
                 <Typography>{item.name}</Typography>
                 <img height={"80px"} width={"80px"} src={item.image} alt={item.name} />
                 <Typography>£{item.price}</Typography>
-              </Card>
+              </Box>
             ))}
-          </Box>
+          </Card>
+          <Card sx={{ maxWidth: 800 }}>
+            <Typography>Total £
+              {basket?.reduce((acc, item) => {
+                return acc + item.price
+              }, 0)}
+
+            </Typography>
+          </Card>
         </Container>
       )}
     </>

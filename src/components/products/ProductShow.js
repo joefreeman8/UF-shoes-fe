@@ -24,6 +24,8 @@ function ProductShow() {
   const [isUpdated, setIsUpdated] = useState(false)
   const [isLoggedIn] = useAuthenticated()
 
+  const [isAdded, setIsAdded] = useState(false)
+
   useEffect(() => {
     API.GET(API.ENDPOINTS.singleProduct(id))
       .then(({ data }) => {
@@ -42,6 +44,20 @@ function ProductShow() {
       .map((review) => review.addedBy._id)
       .some((id) => AUTH.isOwner(id))
   }, [singleProduct])
+
+
+  const toggleBasket = () => {
+    API.POST(API.ENDPOINTS.addAndRemoveBasketItems(id),
+      {},
+      API.getHeaders(),
+    )
+      .then(({ data }) => {
+        console.log(data)
+        setIsAdded(data.likedBy.includes(AUTH.getPayload().userId))
+      })
+
+  }
+
 
   return (
     <>
@@ -69,7 +85,11 @@ function ProductShow() {
                   <Button size="small">review</Button>
                 </Link>
               )}
-            <Button size="small">Add to Cart</Button>
+
+            <Button size="small" onClick={toggleBasket}>
+              {isAdded ? 'Remove from basket' : 'Add to basket'}
+            </Button>
+
           </CardActions>
         </Box>
       </Container>
