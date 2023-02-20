@@ -69,32 +69,47 @@ export default function ReviewCard({
     )
 
   return (
-    <Card sx={{ minWidth: 275, mb: 3 }}>
+    <Card sx={{ minWidth: 275, mb: 3 }} className='review-card'>
       <CardContent>
-        <Typography>{addedBy.username}</Typography>
+        <Typography
+          variant='overline'
+          component='h6'
+          disabled
+        >
+          {addedBy.username}
+        </Typography>
         {isEditMode ? (
           <TextareaAutosize
             value={reviewText}
             onChange={handleReviewTextChange}
-            style={{ width: '100%', height: '40px' }}
+            style={{ width: '100%', height: '50px' }}
           />
         ) : (
-          <Typography>{text}</Typography>
+          <Typography
+            variant='h6'
+            component='p'
+            fontSize={16}
+            gutterBottom
+          >
+            {text}
+          </Typography>
         )}
         <Rating />
       </CardContent>
-      {(AUTH.isOwner(addedBy._id) || AUTH.getPayload().isAdmin) && (
-        <CardActions>
-          {AUTH.isOwner(addedBy._id) && (
-            <Button onClick={toggleEditMode}>
-              {isEditMode ? 'cancel' : 'edit review'}
+      {
+        (AUTH.isOwner(addedBy._id) || AUTH.getPayload().isAdmin) && (
+          <CardActions>
+            {AUTH.isOwner(addedBy._id) && (
+              <Button onClick={toggleEditMode}>
+                {isEditMode ? 'cancel' : 'edit review'}
+              </Button>
+            )}
+            <Button onClick={isEditMode ? saveEditChanges : deleteReview}>
+              {isEditMode ? 'save changes' : 'delete review'}
             </Button>
-          )}
-          <Button onClick={isEditMode ? saveEditChanges : deleteReview}>
-            {isEditMode ? 'save changes' : 'delete review'}
-          </Button>
-        </CardActions>
-      )}
-    </Card>
+          </CardActions>
+        )
+      }
+    </Card >
   )
 }

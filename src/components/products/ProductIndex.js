@@ -24,11 +24,14 @@ function ProductIndex() {
   }, [])
 
   return (
-    <Container maxWidth="lg">
-      <h1>Products</h1>
+    <Container
+      maxWidth="lg"
+      sx={{ mt: 5 }}
+    >
+      <h1 className='products-header'>Products</h1>
       <Grid container spacing={4}>
         {products?.map(product => (
-          <Grid item xs={4} key={product._id}>
+          <Grid item xs={3} key={product._id}>
             <ProductCard
               name={product.name}
               image={product.image}

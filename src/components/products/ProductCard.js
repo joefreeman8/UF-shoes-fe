@@ -15,20 +15,7 @@ export default function ProductCard({ name, image, price, id }) {
   return (
     <Card sx={{ maxWidth: 275, height: 340 }}>
       <CardActionArea onClick={navigateToProduct}>
-        <CardContent className='product-centered'>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="p"
-            align="center"
-            sx={{
-              mt: 2,
-              minHeight: 50
-            }}
-
-          >
-            {name}
-          </Typography>
+        <CardContent>
           <CardMedia
             component="img"
             image={image}
@@ -37,10 +24,22 @@ export default function ProductCard({ name, image, price, id }) {
           />
           <Typography
             variant="h6"
+            component="p"
+            align="center"
+            sx={{
+              mt: 2,
+              mb: -1,
+              minHeight: 50
+            }}
+          >
+            {name}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="subtitle2"
             align="center"
             sx={{
               minHeight: 60
-
             }}
           >
             £{price}

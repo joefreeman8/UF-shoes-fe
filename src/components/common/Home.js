@@ -11,14 +11,15 @@ function Home() {
   return (
     <section className='home'>
       <div className='welcome'>
-        <h1>Welcome to !ezis clothing</h1>
-        <p>Your favourite streetwear retailer</p>
+        <h1>Welcome to Urban Footwear Co.</h1>
+        <p>Your favourite shoe retailer</p>
         <CardActions>
           <Button
             size="large"
             onClick={goToIndex}
             sx={{
               color: 'black'
+
             }}
           >
             enter

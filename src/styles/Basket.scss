@@ -1,0 +1,23 @@
+.basket-container {
+  margin-top: 50px;
+  display: flex;
+  // justify-content: center;
+  // align-items: center;
+
+  Card {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .fail-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      margin-top: 8px;
+    }
+  }
+}

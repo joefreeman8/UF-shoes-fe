@@ -1,5 +1,18 @@
 .product-show {
+  margin-top: 50px;
+
+
   img {
-    height: 500px;
+    max-height: 500px;
+    max-width: 100%;
+  }
+
+  .card-buttons {
+    display: flex;
+    justify-content: center;
+
+    Button {
+      margin: 0 15px;
+    }
   }
 }

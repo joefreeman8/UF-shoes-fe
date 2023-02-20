@@ -17,6 +17,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useAuthenticated } from '../hooks/useAuthenticated';
 import '../../styles/Nav.scss'
 import { AUTH } from '../lib/auth';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 const darkTheme = createTheme({
@@ -71,7 +72,7 @@ function Nav() {
                   textDecoration: 'none',
                 }}
               >
-                !ezis
+                U.F.
               </Typography>
             </Link>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -171,22 +172,12 @@ function Nav() {
               <>
                 <Box>
                   <Link className='link' to={`/basket/${userId}`}>
-                    <Typography
-                      variant="h6"
-                      color="inherit"
-                      component="div"
-                      sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.05rem',
-                        color: 'white',
-                        alignItem: 'center'
-                      }}
+                    <IconButton
+                      aria-label="add to shopping cart"
+                      sx={{ mr: 2 }}
                     >
-                      basket
-                    </Typography>
+                      <ShoppingCartIcon />
+                    </IconButton>
                   </Link>
                 </Box>
                 <Box>

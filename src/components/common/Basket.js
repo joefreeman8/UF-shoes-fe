@@ -1,7 +1,10 @@
 import { Box, Card, Container, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { API } from "../lib/api"
 import { AUTH } from "../lib/auth"
+
+import '../../styles/Basket.scss'
 
 function Basket() {
   const [basket, setBasket] = useState([])
@@ -21,11 +24,15 @@ function Basket() {
     getData()
   }, [userId])
 
+  const getTotal = basket?.reduce((acc, item) => {
+    return acc + item.price
+  }, 0)
+
   return (
     <>
-      {!!basket?.length && (
-        <Container>
-          <Card sx={{ maxWidth: 800 }}>
+      {!!basket?.length ? (
+        <Container className="basket-container">
+          <Card>
             {basket?.map((item) => (
               <Box sx={{ maxWidth: 400, mb: 4 }} key={item._id}>
                 <Typography>{item.name}</Typography>
@@ -33,19 +40,32 @@ function Basket() {
                 <Typography>£{item.price}</Typography>
               </Box>
             ))}
-          </Card>
-          <Card sx={{ maxWidth: 800 }}>
-            <Typography>Total £
-              {basket?.reduce((acc, item) => {
-                return acc + item.price
-              }, 0)}
 
-            </Typography>
+            <Box>
+              <Typography>
+                Total £{getTotal.toFixed(2)}
+              </Typography>
+            </Box>
           </Card>
+        </Container>
+      ) : (
+        <Container className="basket-container">
+          <Box className="fail-box">
+            <Typography
+              fontWeight={'bold'}
+            >
+              Your cart is currently empty.
+            </Typography>
+            <Typography>
+              Back to the <Link to='/shop'>shop</Link>
+            </Typography>
+            <img maxHeight={500} width={'80%'} src="https://media.giphy.com/media/3o7WTIMJo0rRaZW4ms/giphy.gif" alt="empty cart gif" />
+          </Box>
         </Container>
       )}
     </>
   )
 }
+
 
 export default Basket

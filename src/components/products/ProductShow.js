@@ -24,7 +24,7 @@ function ProductShow() {
   const [isUpdated, setIsUpdated] = useState(false)
   const [isLoggedIn] = useAuthenticated()
 
-  const [isAdded, setIsAdded] = useState(false)
+  const [isAddedToBasket, setIsAddedToBasket] = useState(false)
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.singleProduct(id))
@@ -52,8 +52,8 @@ function ProductShow() {
       API.getHeaders(),
     )
       .then(({ data }) => {
-        console.log(data)
-        setIsAdded(data.likedBy.includes(AUTH.getPayload().userId))
+        const userBasket = data.likedBy.includes(AUTH.getPayload().userId)
+        setIsAddedToBasket(userBasket)
       })
 
   }
@@ -63,38 +63,64 @@ function ProductShow() {
     <>
       <Container maxWidth='lg' sx={{ display: 'flex' }} className='product-show'>
         <Box sx={{ mt: 5 }}>
-          <img src={singleProduct?.image} alt={singleProduct?.name} />
+          <img
+            src={singleProduct?.image}
+            alt={singleProduct?.name}
+          />
         </Box>
-        <Box sx={{ mt: 5 }}>
+        <Box sx={{ mt: 5, ml: 3, width: 450 }}>
           <CardContent>
-            <Typography variant='h3' component='p'>
+            <Typography
+              variant='h3'
+              component='p'
+              sx={{ mb: 1 }}
+            >
               {singleProduct?.name}
             </Typography>
-            <Typography variant='h4' component='p'>
+            <Typography
+              variant='subtitle1'
+              component='p'
+              sx={{ mb: 2, fontSize: 16 }}
+            >
               £ {singleProduct?.price}
-            </Typography >
+            </Typography>
+            <Typography
+              sx={{ mb: 2 }}
+            >
+              {singleProduct?.description}
+            </Typography>
             <ProductRatings
               rating={singleProduct?.avgRating}
             />
           </CardContent>
-          <CardActions>
+          <CardActions
+            className="card-buttons"
+          >
             <Button size="small" onClick={goToIndex}>back to shop</Button>
             {isLoggedIn &&
-              !userHasReviewed && (
-                <Link to={`/shop/${singleProduct?._id}/reviews`}>
-                  <Button size="small">review</Button>
-                </Link>
-              )}
-
-            <Button size="small" onClick={toggleBasket}>
-              {isAdded ? 'Remove from basket' : 'Add to basket'}
-            </Button>
-
+              <>
+                {!userHasReviewed ? (
+                  <Link to={`/shop/${singleProduct?._id}/reviews`}>
+                    <Button size="small">review</Button>
+                  </Link>
+                ) : (
+                  <Button size="small" disabled>review</Button>
+                )}
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="success"
+                  onClick={toggleBasket}
+                >
+                  {isAddedToBasket ? 'Remove basket' : 'Add to basket'}
+                </Button>
+              </>
+            }
           </CardActions>
         </Box>
       </Container>
       {!!singleProduct?.reviews.length && (
-        <Container>
+        <Container sx={{ mt: 5 }}>
           <Box>
             {singleProduct?.reviews.map((review) => (
               <ReviewCard

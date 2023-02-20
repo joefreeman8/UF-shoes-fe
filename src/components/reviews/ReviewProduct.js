@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { API } from "../lib/api"
 import ProductRatings from "../products/ProductRatings"
 
+import '../../styles/ReviewProduct.scss'
+
 
 export default function ReviewProduct() {
   const { id } = useParams()
@@ -29,7 +31,7 @@ export default function ReviewProduct() {
   }
 
   return (
-    <Container>
+    <Container className='review-container'>
       <form onSubmit={handleSubmit}>
         <Box>
           <TextareaAutosize
