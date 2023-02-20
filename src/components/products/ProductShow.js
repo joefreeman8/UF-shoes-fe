@@ -11,11 +11,11 @@ import {
 
 import { API } from "../lib/api"
 import { AUTH } from "../lib/auth"
-import '../../styles/ProductShow.scss'
 import { useAuthenticated } from "../hooks/useAuthenticated"
 import ReviewCard from "../reviews/ReviewCard"
 import ProductRatings from "./ProductRatings"
 
+import '../../styles/ProductShow.scss'
 
 function ProductShow() {
   const navigate = useNavigate()
@@ -121,9 +121,10 @@ function ProductShow() {
       </Container>
       {!!singleProduct?.reviews.length && (
         <Container sx={{ mt: 5 }}>
-          <Box>
+          <Box className="view-cards-newest-first">
             {singleProduct?.reviews.map((review) => (
               <ReviewCard
+                className="test"
                 key={review._id}
                 text={review.text}
                 rating={review.rating}
