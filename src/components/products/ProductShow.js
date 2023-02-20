@@ -55,8 +55,9 @@ function ProductShow() {
         const userBasket = data.likedBy.includes(AUTH.getPayload().userId)
         setIsAddedToBasket(userBasket)
       })
-
   }
+
+  const loginToReviewOrBuy = () => navigate('/login')
 
 
   return (
@@ -97,7 +98,7 @@ function ProductShow() {
             className="card-buttons"
           >
             <Button size="small" onClick={goToIndex}>back to shop</Button>
-            {isLoggedIn &&
+            {isLoggedIn ? (
               <>
                 {!userHasReviewed ? (
                   <Link to={`/shop/${singleProduct?._id}/reviews`}>
@@ -115,28 +116,35 @@ function ProductShow() {
                   {isAddedToBasket ? 'Remove basket' : 'Add to basket'}
                 </Button>
               </>
-            }
+            ) : (
+              <>
+                <Button size="small" onClick={loginToReviewOrBuy}>review</Button>
+                <Button size="small" variant="contained" color="success" onClick={loginToReviewOrBuy}>Add to basket</Button>
+              </>
+            )}
           </CardActions>
         </Box>
-      </Container>
-      {!!singleProduct?.reviews.length && (
-        <Container sx={{ mt: 5 }}>
-          <Box className="view-cards-newest-first">
-            {singleProduct?.reviews.map((review) => (
-              <ReviewCard
-                className="test"
-                key={review._id}
-                text={review.text}
-                rating={review.rating}
-                addedBy={review.addedBy}
-                reviewId={review._id}
-                productId={id}
-                setIsUpdated={setIsUpdated}
-              />
-            ))}
-          </Box>
-        </Container>
-      )}
+      </Container >
+      {
+        !!singleProduct?.reviews.length && (
+          <Container sx={{ mt: 5 }}>
+            <Box className="view-cards-newest-first">
+              {singleProduct?.reviews.map((review) => (
+                <ReviewCard
+                  className="test"
+                  key={review._id}
+                  text={review.text}
+                  rating={review.rating}
+                  addedBy={review.addedBy}
+                  reviewId={review._id}
+                  productId={id}
+                  setIsUpdated={setIsUpdated}
+                />
+              ))}
+            </Box>
+          </Container>
+        )
+      }
     </>
   )
 }
