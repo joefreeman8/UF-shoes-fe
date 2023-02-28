@@ -4,20 +4,19 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Menu,
   Container,
-  MenuItem,
 } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu'
+
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-
-import { useState } from 'react'
-import { Link, useNavigate } from "react-router-dom"
-
-import { useAuthenticated } from '../hooks/useAuthenticated';
-import '../../styles/Nav.scss'
-import { AUTH } from '../lib/auth';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+import { Link, useNavigate } from "react-router-dom"
+import { useAuthenticated } from '../hooks/useAuthenticated';
+import { AUTH } from '../lib/auth';
+import NavMobile from './NavMobile'
+
+import '../../styles/Nav.scss'
+
 
 
 const darkTheme = createTheme({
@@ -40,16 +39,6 @@ function Nav() {
     setIsLoggedIn(false)
     navigate('/')
   }
-  const [anchorElNav, setAnchorElNav] = useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
 
   return (
@@ -75,82 +64,13 @@ function Nav() {
                 U.F.
               </Typography>
             </Link>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="white"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
+            <NavMobile
 
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Link className='link' to='/shop' >
-                    <Typography
-                      textAlign="center"
-                      variant="h6"
-                      noWrap
-                      component="div"
-                      sx={{
-                        mr: 2,
-                        display: { xs: 'flex', md: 'none' },
-                        flexGrow: 1,
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.05rem',
-                        color: 'white',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      shop
-                    </Typography>
-                  </Link>
-                </MenuItem>
-              </Menu>
-            </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.05rem',
-                color: 'white',
-                textDecoration: 'none',
-              }}
-            >
-              LOGO WHEN SMALL
-            </Typography>
+            />
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Link className='link' to='/shop' >
                 <Typography
-                  onClick={handleCloseNavMenu}
                   variant="h6"
                   noWrap
                   component="div"
@@ -174,7 +94,10 @@ function Nav() {
                   <Link className='link' to={`/basket/${userId}`}>
                     <IconButton
                       aria-label="add to shopping cart"
-                      sx={{ mr: 2 }}
+                      sx={{
+                        mr: 2,
+                        display: { xs: 'none', md: 'flex' }
+                      }}
                     >
                       <ShoppingCartIcon />
                     </IconButton>
