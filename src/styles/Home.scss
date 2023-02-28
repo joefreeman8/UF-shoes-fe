@@ -10,3 +10,11 @@
     font-size: 30px;
   }
 }
+
+@media (max-width: 500px) {
+
+  .welcome {
+    text-align: center;
+    font-size: 20px;
+  }
+}

@@ -14,6 +14,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuthenticated } from '../hooks/useAuthenticated'
 import { AUTH } from '../lib/auth'
 
+import '../../styles/NavMobile.scss'
+
 function NavMobile() {
   const navigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useAuthenticated()
@@ -191,6 +193,7 @@ function NavMobile() {
         </Menu>
 
       </Box>
+
       <Typography
         variant="h6"
         noWrap
@@ -205,7 +208,12 @@ function NavMobile() {
           textDecoration: 'none',
         }}
       >
-        Urban Footwear
+        <Link
+          to={'/'}
+          className='link'
+        >
+          Urban Footwear
+        </Link>
       </Typography>
     </>
   )
