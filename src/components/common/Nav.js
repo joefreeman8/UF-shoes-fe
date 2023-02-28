@@ -46,6 +46,9 @@ function Nav() {
       <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            {/* MOBILE VIEW */}
+            <NavMobile />
+            {/* NON MOBILE VIEW */}
             <Link className='link' to="/">
               <Typography
                 variant="h6"
@@ -64,12 +67,8 @@ function Nav() {
                 U.F.
               </Typography>
             </Link>
-            <NavMobile
-
-            />
-
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link className='link' to='/shop' >
+              <Link className='link' to='/shop'>
                 <Typography
                   variant="h6"
                   noWrap
@@ -86,7 +85,6 @@ function Nav() {
                   shop
                 </Typography>
               </Link>
-
             </Box>
             {isLoggedIn ? (
               <>
@@ -126,7 +124,7 @@ function Nav() {
               </>
             ) : (
               <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-                <Link className='link' to='/register' >
+                <Link className='link' to='/register'>
                   <Typography
                     variant="h6"
                     noWrap
@@ -144,7 +142,7 @@ function Nav() {
                     register
                   </Typography>
                 </Link>
-                <Link className='link' to='/login' >
+                <Link className='link' to='/login'>
                   <Typography
                     variant="h6"
                     noWrap
@@ -168,8 +166,8 @@ function Nav() {
           </Toolbar>
         </Container>
       </AppBar>
-    </ThemeProvider >
-  );
+    </ThemeProvider>
+  )
 }
 
 export default Nav

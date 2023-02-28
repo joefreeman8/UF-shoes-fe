@@ -26,10 +26,10 @@ function NavMobile() {
     navigate('/')
   }
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null)
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+    setAnchorElNav(event.currentTarget)
   };
 
 
@@ -70,7 +70,7 @@ function NavMobile() {
         >
           <MenuList direction="row">
             <MenuItem onClick={handleCloseNavMenu}>
-              <Link className='link small-screen-nav' to='/shop' >
+              <Link className='link small-screen-nav' to='/shop'>
                 <Typography
                   textAlign="center"
                   variant="h6"
@@ -140,7 +140,7 @@ function NavMobile() {
             ) : (
               <Box>
                 <MenuItem>
-                  <Link className='link small-screen-nav' to='/register' >
+                  <Link className='link small-screen-nav' to='/register'>
                     <Typography
                       textAlign="center"
                       variant="h6"
@@ -163,7 +163,7 @@ function NavMobile() {
                   </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link className='link small-screen-nav' to='/login' >
+                  <Link className='link small-screen-nav' to='/login'>
                     <Typography
                       textAlign="center"
                       variant="h6"
