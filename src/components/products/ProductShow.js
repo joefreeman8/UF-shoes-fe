@@ -70,8 +70,8 @@ function ProductShow() {
           />
         </Box>
         <Box
-          className="margin-mobile"
-          sx={{ maxWidth: 450 }}>
+          id="margin-mobile"
+          sx={{ ml: 5, maxWidth: 450 }}>
           <CardContent
             className="margin-mobile"
             sx={{ mt: 5 }}>

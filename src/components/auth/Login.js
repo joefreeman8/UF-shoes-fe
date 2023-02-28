@@ -53,7 +53,7 @@ export default function Login() {
         }}
       >
         <Typography
-          sx={{ mb: 2, fontSize: "16px" }}
+          sx={{ mb: 2, fontSize: "16px", textAlign: 'center' }}
         >
           Please complete the fields below to Login.
         </Typography>
@@ -97,7 +97,7 @@ export default function Login() {
           </Box>
         </form>
         <Typography
-          sx={{ width: "100%", mt: 2, mb: -1 }}
+          sx={{ width: "100%", mt: 2, mb: -1, textAlign: 'center' }}
         >
           Don't have an account? click <Link to={"/register"}>here</Link> to Register.
         </Typography>

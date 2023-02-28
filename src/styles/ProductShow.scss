@@ -24,7 +24,7 @@
 }
 
 //!!! First Media Query Kick In
-@media (max-width: 821px) {
+@media (max-width: 851px) {
   .product-show {
     margin-top: 5px;
     // flex-direction: column;
@@ -33,6 +33,10 @@
       margin-top: 5px;
       min-height: 307px;
       min-width: 100%;
+    }
+
+    #margin-mobile {
+      margin: 0 8px;
     }
 
     .product-title {
@@ -50,7 +54,7 @@
 }
 
 // !!! Second Media Query Kick In
-@media (max-width: 760px) {
+@media (max-width: 780px) {
   .product-show {
     display: flex;
     flex-direction: column;
@@ -62,9 +66,7 @@
       max-height: 400px;
     }
 
-    .margin-mobile {
-      margin: 0 8px;
-    }
+
 
     .product-title {
       display: flex;
