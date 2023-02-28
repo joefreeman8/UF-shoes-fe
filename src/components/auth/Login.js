@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API } from "../lib/api";
 import { AUTH } from "../lib/auth";
 
-import { Box, TextField, Button, Container } from '@mui/material'
+import { Box, TextField, Button, Container, Card, Typography } from '@mui/material'
+
+
+import '../../styles/Login.scss'
+
+
 
 export default function Login() {
 
@@ -33,53 +38,70 @@ export default function Login() {
   }
 
   return (
-    <Container className='Login'
+    <Container
       maxWidth='lg'
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        alignContent: 'center',
         height: 500
       }}>
-      <Box
-        onSubmit={handleSubmit}
-        component="form"
-        sx={{ m: 0, width: '25ch' }}
-        noValidate
-        autoComplete="off"
+      <Card
+        sx={{
+          padding: 5
+        }}
       >
-        <div>
-          <TextField
-            className='formFields'
-            label='Email'
-            name='email'
-            id='email'
-            type='email'
-            value={formFields.email}
-            onChange={handleChange}
-            error={error.email}
-            sx={{ mb: 1 }}
-          />
-          <TextField
-            className='formFields'
-            label='Password'
-            name='password'
-            id='password'
-            type='password'
-            value={formFields.password}
-            onChange={handleChange}
-            error={error.password}
-            sx={{ mb: 1 }}
-          />
-        </div>
-        <Button
-          variant="contained"
-          type='submit'
-          sx={{ pr: 7, pl: 7 }}
+        <Typography
+          sx={{ mb: 2, fontSize: "16px" }}
         >
-          Login
-        </Button>
-      </Box>
+          Please complete the fields below to Login.
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center',
+            flexDirection: 'column',
+          }}>
+            <TextField
+              size="small"
+              label='Email'
+              name='email'
+              id='email'
+              type='email'
+              value={formFields.email}
+              onChange={handleChange}
+              error={error.email}
+              sx={{ width: '80%', mb: 1.2 }}
+            />
+            <TextField
+              size="small"
+              label='Password'
+              name='password'
+              id='password'
+              type='password'
+              value={formFields.password}
+              onChange={handleChange}
+              error={error.password}
+              sx={{ width: "80%", mb: 1.2 }}
+            />
+            <Button
+              variant="contained"
+              type='submit'
+              sx={{ width: "80%", mt: 1.2 }}
+            >
+              Login
+            </Button>
+          </Box>
+        </form>
+        <Typography
+          sx={{ width: "100%", mt: 2, mb: -1 }}
+        >
+          Don't have an account? click <Link to={"/register"}>here</Link> to Register.
+        </Typography>
+      </Card>
     </Container >
   )
 }

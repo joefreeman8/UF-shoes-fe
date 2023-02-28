@@ -31,7 +31,7 @@ function ProductIndex() {
       <h1 className='products-header'>Products</h1>
       <Grid container spacing={4}>
         {products?.map(product => (
-          <Grid item xs={3} key={product._id}>
+          <Grid item xs={6} sm={4} md={3} key={product._id}>
             <ProductCard
               name={product.name}
               image={product.image}

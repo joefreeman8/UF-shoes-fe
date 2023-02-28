@@ -69,9 +69,14 @@ function ProductShow() {
             alt={singleProduct?.name}
           />
         </Box>
-        <Box sx={{ mt: 5, ml: 3, width: 450 }}>
-          <CardContent>
+        <Box
+          className="margin-mobile"
+          sx={{ maxWidth: 450 }}>
+          <CardContent
+            className="margin-mobile"
+            sx={{ mt: 5 }}>
             <Typography
+              className="product-title"
               variant='h3'
               component='p'
               sx={{ mb: 1 }}
@@ -79,6 +84,7 @@ function ProductShow() {
               {singleProduct?.name}
             </Typography>
             <Typography
+              className="product-price"
               variant='subtitle1'
               component='p'
               sx={{ mb: 2, fontSize: 16 }}
@@ -86,13 +92,17 @@ function ProductShow() {
               £ {singleProduct?.price}
             </Typography>
             <Typography
+              className="product-description"
               sx={{ mb: 2 }}
             >
               {singleProduct?.description}
             </Typography>
-            <ProductRatings
-              rating={singleProduct?.avgRating}
-            />
+            <Box className="for-stars">
+              <ProductRatings
+                rating={singleProduct?.avgRating}
+                size={"28px"}
+              />
+            </Box>
           </CardContent>
           <CardActions
             className="card-buttons"

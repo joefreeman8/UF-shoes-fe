@@ -1,9 +1,11 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { API } from "../lib/api"
 import { AUTH } from '../lib/auth'
 
-import { Container, Box, TextField, Button } from '@mui/material'
+import { Container, Box, TextField, Button, Card, Typography } from '@mui/material'
+
+import '../../styles/Register.scss'
 
 
 export default function Register() {
@@ -54,85 +56,90 @@ export default function Register() {
         alignContent: 'center',
         height: 500,
       }}>
-      <form onSubmit={handleSubmit}>
-        <Box>
-          <TextField
-            size="small"
-            label='Username'
-            name='username'
-            id='username'
-            type='username'
-            required={true}
-            value={formFields.username}
-            onChange={handleChange}
-            error={error.username}
-            sx={{ mb: 1 }}
-          />
-        </Box>
-        <Box>
-          <TextField
-            size="small"
-            label='Email'
-            name='email'
-            id='email'
-            type='email'
-            required={true}
-            value={formFields.email}
-            onChange={handleChange}
-            error={error.email}
-            sx={{ mb: 1 }}
-          />
-        </Box>
-        <Box>
-          <TextField
-            size="small"
-            label='Password'
-            name='password'
-            id='password'
-            type='password'
-            required={true}
-            value={formFields.password}
-            onChange={handleChange}
-            error={error.password}
-            sx={{ mb: 1 }}
-          />
-        </Box>
-        <Box>
-          <TextField
-            size="small"
-            label='Password Confirmation'
-            name='passwordConfirmation'
-            id='passwordConfirmation'
-            type='password'
-            required={true}
-            value={formFields.passwordConfirmation}
-            onChange={handleChange}
-            error={error.passwordConfirmation}
-            sx={{ mb: 1 }}
-          />
-        </Box>
-        {/* <Box>
-          <TextField
-            size="small"
-            name='profile-picture'
-            id='profile-picture'
-            type='file'
-            onChange={handleFileChange}
-            sx={{ mb: 1 }}
-          />
-        </Box> */}
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignContent: 'center',
-
-        }}>
-          <Button variant="contained" type='submit'
-            sx={{ pr: 3, pl: 3 }}>
-            CREATE ACCOUNT</Button>
-        </Box>
-      </form>
+      <Card
+        sx={{
+          padding: 5
+        }}
+      >
+        <Typography
+          sx={{ mb: 2, fontSize: "16px" }}
+        >
+          Please complete the fields below to Register.
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Box>
+            <TextField
+              size="small"
+              label='Username'
+              name='username'
+              id='username'
+              type='username'
+              required={true}
+              value={formFields.username}
+              onChange={handleChange}
+              error={error.username}
+              sx={{ width: "100%", mb: 1.2 }}
+            />
+          </Box>
+          <Box>
+            <TextField
+              size="small"
+              label='Email'
+              name='email'
+              id='email'
+              type='email'
+              required={true}
+              value={formFields.email}
+              onChange={handleChange}
+              error={error.email}
+              sx={{ width: "100%", mb: 1.2 }}
+            />
+          </Box>
+          <Box>
+            <TextField
+              size="small"
+              label='Password'
+              name='password'
+              id='password'
+              type='password'
+              required={true}
+              value={formFields.password}
+              onChange={handleChange}
+              error={error.password}
+              sx={{ width: "100%", mb: 1.2 }}
+            />
+          </Box>
+          <Box>
+            <TextField
+              size="small"
+              label='Password Confirmation'
+              name='passwordConfirmation'
+              id='passwordConfirmation'
+              type='password'
+              required={true}
+              value={formFields.passwordConfirmation}
+              onChange={handleChange}
+              error={error.passwordConfirmation}
+              sx={{ width: "100%", mb: 1.2 }}
+            />
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}>
+            <Button variant="contained" type='submit'
+              sx={{ width: "100%", mt: 1.2 }}>
+              CREATE ACCOUNT</Button>
+          </Box>
+        </form>
+        <Typography
+          sx={{ width: "100%", mt: 2, mb: -1 }}
+        >
+          Already have an account? click <Link to={"/login"}>here</Link> to Login
+        </Typography>
+      </Card>
     </Container>
   )
 }

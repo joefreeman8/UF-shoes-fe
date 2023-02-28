@@ -7,6 +7,8 @@ import {
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
+import '../../styles/ProductCard.scss'
+
 export default function ProductCard({ name, image, price, id }) {
 
   const navigate = useNavigate()
@@ -23,6 +25,7 @@ export default function ProductCard({ name, image, price, id }) {
             sx={{ mt: 1, height: 200, width: '100%', objectFit: 'contain' }}
           />
           <Typography
+            id="product-card-title"
             variant="h6"
             component="p"
             align="center"
