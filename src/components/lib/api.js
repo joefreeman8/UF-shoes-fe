@@ -10,8 +10,9 @@ const ENDPOINTS = {
   register: '/api/register',
   login: '/api/login',
 
-  addAndRemoveBasketItems: (id) => `/api/shop/${id}/basket`,
-  basketItems: (userId) => `/api/basket/${userId}`
+  toggleBasketItems: (id) => `/api/shop/${id}/basket`,
+  basketItems: (userId) => `/api/basket/${userId}`,
+  deleteBasketItem: (userId, productId) => `/api/basket/${userId}/${productId}`
 }
 
 const getHeaders = () => ({
@@ -21,7 +22,8 @@ const getHeaders = () => ({
 })
 
 
-const GET = (endpoint) => axios.get(endpoint)
+const GET = (endpoint, headers) =>
+  headers ? axios.get(endpoint, headers) : axios.get(endpoint)
 
 const POST = (endpoint, body, headers) =>
   headers ? axios.post(endpoint, body, headers) : axios.post(endpoint, body)

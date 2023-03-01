@@ -14,7 +14,9 @@ function Basket() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await API.GET(API.ENDPOINTS.basketItems(userId))
+        const { data } = await API.GET(API.ENDPOINTS.basketItems(userId),
+          API.getHeaders()
+        )
         setBasket(data.basket)
         console.log(data.basket)
       } catch (err) {
@@ -34,13 +36,12 @@ function Basket() {
         <Container className="basket-container">
           <Card>
             {basket?.map((item) => (
-              <Box sx={{ maxWidth: 400, mb: 4 }} key={item._id}>
+              <Card sx={{ maxWidth: 400, mb: 4 }} key={item._id}>
                 <Typography>{item.name}</Typography>
                 <img height={"80px"} width={"80px"} src={item.image} alt={item.name} />
                 <Typography>£{item.price}</Typography>
-              </Box>
+              </Card>
             ))}
-
             <Box>
               <Typography>
                 Total £{getTotal.toFixed(2)}

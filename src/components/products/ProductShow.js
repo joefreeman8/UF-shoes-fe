@@ -47,7 +47,7 @@ function ProductShow() {
 
 
   const toggleBasket = () => {
-    API.POST(API.ENDPOINTS.addAndRemoveBasketItems(id),
+    API.POST(API.ENDPOINTS.toggleBasketItems(id),
       {},
       API.getHeaders(),
     )
