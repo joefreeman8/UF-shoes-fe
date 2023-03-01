@@ -17,8 +17,6 @@ import NavMobile from './NavMobile'
 
 import '../../styles/Nav.scss'
 
-
-
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -26,7 +24,8 @@ const darkTheme = createTheme({
       main: '#1976d2',
     },
   },
-});
+})
+
 
 function Nav() {
   const navigate = useNavigate()
@@ -39,7 +38,6 @@ function Nav() {
     setIsLoggedIn(false)
     navigate('/')
   }
-
 
   return (
     <ThemeProvider theme={darkTheme}>

@@ -56,20 +56,20 @@ function ProductIndex() {
           ))}
         </Select>
       </Box>
-      <Grid container spacing={4}>
-        {(filteredBrands.length ? filteredBrands : products).map(product => (
-          <Grid item xs={6} sm={4} md={3} key={product._id}>
-            <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Grid container spacing={4}>
+          {(filteredBrands.length ? filteredBrands : products).map(product => (
+            <Grid item xs={6} sm={4} md={3} key={product._id}>
               <ProductCard
                 name={product.name}
                 image={product.image}
                 price={product.price}
                 id={product._id}
               />
-            </Suspense>
-          </Grid>
-        ))}
-      </Grid>
+            </Grid>
+          ))}
+        </Grid>
+      </Suspense>
     </Container >
   )
 }
