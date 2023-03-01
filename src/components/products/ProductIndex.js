@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 import { Box, Container, Grid, Select, MenuItem } from '@mui/material'
 
-import ProductCard from './ProductCard'
 import { API } from '../lib/api'
 import '../../styles/ProductIndex.scss'
+
+const ProductCard = lazy(() => import('./ProductCard'))
 
 function ProductIndex() {
   const [products, setProducts] = useState([])
@@ -58,12 +59,14 @@ function ProductIndex() {
       <Grid container spacing={4}>
         {(filteredBrands.length ? filteredBrands : products).map(product => (
           <Grid item xs={6} sm={4} md={3} key={product._id}>
-            <ProductCard
-              name={product.name}
-              image={product.image}
-              price={product.price}
-              id={product._id}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ProductCard
+                name={product.name}
+                image={product.image}
+                price={product.price}
+                id={product._id}
+              />
+            </Suspense>
           </Grid>
         ))}
       </Grid>
