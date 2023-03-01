@@ -16,8 +16,6 @@ function ProductIndex() {
       try {
         const { data } = await API.GET(API.ENDPOINTS.allProducts)
         setProducts(data)
-
-
       } catch (err) {
         console.log(err)
       }
