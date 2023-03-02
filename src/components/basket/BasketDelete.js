@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
-import { API } from "./lib/api"
+import { API } from "../lib/api"
 
 const BasketDelete = () => {
 

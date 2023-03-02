@@ -9,8 +9,8 @@ import Login from './components/auth/Login';
 import ReviewProduct from './components/reviews/ReviewProduct';
 
 import './styles/App.css'
-import Basket from './components/common/Basket';
-import BasketDelete from './components/BasketDelete';
+import Basket from './components/basket/Basket';
+import BasketDelete from './components/basket/BasketDelete';
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
