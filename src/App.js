@@ -7,10 +7,10 @@ import ProductShow from './components/products/ProductShow';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import ReviewProduct from './components/reviews/ReviewProduct';
+import Basket from './components/basket/Basket';
 
 import './styles/App.css'
-import Basket from './components/basket/Basket';
-import BasketDelete from './components/basket/BasketDelete';
+
 
 window.Buffer = window.Buffer || require('buffer').Buffer
 
@@ -26,7 +26,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/basket/:userId" element={<Basket />} />
-        <Route path="/basket/:userId/:productId" element={<BasketDelete />} />
       </Routes>
     </BrowserRouter>
   )
