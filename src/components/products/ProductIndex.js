@@ -38,7 +38,7 @@ function ProductIndex() {
     }
   }, [filters, products])
 
-  //removes the duplicates from my brands. 
+  //removes the duplicates from my brands and puts them in alphabetical order. 
   const brands = [...new Set(products?.map(product => product.brand))].sort()
   brands.unshift('All')
 
