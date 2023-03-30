@@ -15,6 +15,7 @@ const ENDPOINTS = {
   deleteBasketItem: (userId, productId) => `/api/basket/${userId}/${productId}`
 }
 
+
 const getHeaders = () => ({
   headers: {
     authorization: `Bearer ${AUTH.getToken()}`
