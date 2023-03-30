@@ -98,9 +98,9 @@ import { API } from "../lib/api";
 import '../../styles/Basket.scss';
 
 function Basket() {
-  const [basket, setBasket] = useState([]);
-  const [isUpdated, setIsUpdated] = useState(false);
-  const { userId } = useParams();
+  const [basket, setBasket] = useState([])
+  const [isUpdated, setIsUpdated] = useState(false)
+  const { userId } = useParams()
 
   useEffect(() => {
     const getData = async () => {
@@ -174,5 +174,5 @@ function Basket() {
   )
 }
 
-export default Basket;
+export default Basket
 
