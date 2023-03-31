@@ -107,12 +107,12 @@ function ProductShow() {
           <CardActions
             className="card-buttons"
           >
-            <Button size="small" onClick={goToIndex}>back to shop</Button>
+            <Button size="small" color="success" onClick={goToIndex}>back to shop</Button>
             {isLoggedIn ? (
               <>
                 {!userHasReviewed ? (
-                  <Link to={`/shop/${singleProduct?._id}/reviews`}>
-                    <Button size="small">review</Button>
+                  <Link className="remove-text-decoration" to={`/shop/${singleProduct?._id}/reviews`}>
+                    <Button color="success" size="small">review</Button>
                   </Link>
                 ) : (
                   <Button size="small" disabled>review</Button>

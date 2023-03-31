@@ -23,6 +23,10 @@
   flex-direction: column-reverse;
 }
 
+.remove-text-decoration {
+  text-decoration: none;
+}
+
 //!!! First Media Query Kick In
 @media (max-width: 851px) {
   .product-show {

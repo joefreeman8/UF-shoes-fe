@@ -90,7 +90,7 @@
 
 // export default Basket
 
-import { Box, Button, Card, Container, Typography } from "@mui/material";
+import { Box, Button, Card, Container, Grid, Typography, CardMedia, CardContent } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API } from "../lib/api";
@@ -98,79 +98,119 @@ import { API } from "../lib/api";
 import '../../styles/Basket.scss';
 
 function Basket() {
-  const [basket, setBasket] = useState([])
-  const [isUpdated, setIsUpdated] = useState(false)
-  const { userId } = useParams()
+  const [basket, setBasket] = useState([]);
+  const [isUpdated, setIsUpdated] = useState(false);
+  const { userId } = useParams();
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await API.GET(API.ENDPOINTS.basketItems(userId),
+        const { data } = await API.GET(
+          API.ENDPOINTS.basketItems(userId),
           API.getHeaders()
-        )
-        setBasket(data.basket)
-        console.log(data.basket)
+        );
+        setBasket(data.basket);
+        console.log(data.basket);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    getData()
-    setIsUpdated(false)
-  }, [userId, isUpdated])
+    };
+    getData();
+    setIsUpdated(false);
+  }, [userId, isUpdated]);
 
   const deleteItemFromBasket = (e) => {
-    console.log('target ->', e.target.value)
+    console.log("target ->", e.target.value);
 
     API.DELETE(
       API.ENDPOINTS.deleteBasketItem(userId, e.target.value),
       API.getHeaders()
     )
       .then(() => {
-        setIsUpdated(true)
+        setIsUpdated(true);
       })
-      .catch((e) => console.log(e))
-
-  }
+      .catch((e) => console.log(e));
+  };
 
   const getTotal = basket?.reduce((acc, item) => {
-    return acc + item.price
-  }, 0)
+    return acc + item.price;
+  }, 0);
 
   return (
-    <Container className="basket-container" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <>
       {!!basket?.length ? (
-        <Card sx={{ maxWidth: 450, width: '100%' }}>
-          {basket?.map((item) => (
-            <Card sx={{ display: 'flex', alignItems: 'center', p: 2, mx: 5, my: 3 }} key={item._id}>
-              <img height={"100px"} width={"100px"} src={item.image} alt={item.name} style={{ marginRight: '16px' }} />
-              <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                <Typography>{item.name}</Typography>
-                <Typography>£{item.price}</Typography>
+        <Container
+          maxWidth="lg"
+          sx={{ mt: 5 }}
+        >
+          <h1 sx={{ mt: 3 }}>
+            Your Basket
+          </h1>
+          <Box sx={{ display: "flex", justifyContent: "center" }} >
+            <Card sx={{ p: 3, width: "50%", mt: 10, }}>
+              <Grid container spacing={3}>
+                {basket?.map((item) => (
+                  <Grid item xs={12} key={item._id}>
+                    <Card sx={{ display: "flex", alignItems: "center", p: 2 }}>
+                      <CardMedia
+                        component="img"
+                        image={item.image}
+                        alt={item.name}
+                        sx={{ width: 100, height: 100 }}
+                      />
+                      <CardContent sx={{ flex: 1, display: "flex", flexDirection: "column", pl: 2 }}>
+                        <Typography component="div" sx={{ mb: 1 }}>
+                          <Box fontWeight="bold">{item.name}</Box>
+                        </Typography>
+                        <Typography variant="subtitle1" color="text.secondary" sx={{ flexGrow: 1 }}>
+                          <Box>{`£${item.price}`}</Box>
+                        </Typography>
+                      </CardContent>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        value={item._id}
+                        onClick={deleteItemFromBasket}
+                      >
+                        X
+                      </Button>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+              <Box sx={{ mt: 3, display: "flex", justifyContent: "center", alignItems: 'center', flexDirection: "column" }}>
+                <Typography fontWeight="bold">
+                  Total: £{getTotal.toFixed(2)}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="success"
+                  size="large"
+                  sx={{ mt: 2 }}
+                >
+                  Checkout
+                </Button>
               </Box>
-              <Button value={item._id} onClick={deleteItemFromBasket} sx={{ color: 'black' }}>X</Button>
             </Card>
-          ))}
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2, mb: 2 }}>
-            <Typography sx={{ fontWeight: 'bold', mb: 1 }}>
-              Total: £{getTotal.toFixed(2)}
-            </Typography>
-            <Button variant="contained" color="primary">
-              Proceed to Checkout
-            </Button>
           </Box>
-        </Card>
+        </Container>
       ) : (
-        <Box className="fail-box">
-          <Typography fontWeight={'bold'}>
-            Your cart is currently empty.
-          </Typography>
-          <Typography>
-            Back to the <Link to='/shop'>shop</Link>
-          </Typography>
-          <img maxheight={500} width={'80%'} src="https://media.giphy.com/media/3o7WTIMJo0rRaZW4ms/giphy.gif" alt="empty cart gif" />
-        </Box>
-      )}
-    </Container>
+        <Container className="basket-container">
+          <Box className="fail-box" sx={{ textAlign: "center" }}>
+            <Typography fontWeight="bold" variant="h5" sx={{ mb: 2 }}>
+              Your cart is currently empty.
+            </Typography>
+            <Typography variant="subtitle1" sx={{ mb: 3 }}>
+              Head back to the <Link to="/shop">shop</Link> and start adding
+              items to your basket!
+            </Typography>
+            <img src="https://media.giphy.com/media/3o7WTIMJo0rRaZW4ms/giphy.gif" alt="empty cart gif" />
+          </Box>
+        </Container>
+      )
+      }
+    </>
   )
 }
 
