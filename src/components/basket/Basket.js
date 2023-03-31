@@ -18,7 +18,6 @@ function Basket() {
           API.getHeaders()
         );
         setBasket(data.basket)
-        console.log(data.basket)
       } catch (err) {
         console.log(err)
       }
@@ -27,21 +26,20 @@ function Basket() {
     setIsUpdated(false)
   }, [userId, isUpdated])
 
-  const deleteItemFromBasket = (e) => {
-    console.log("target ->", e.target.value)
-
-    API.DELETE(
-      API.ENDPOINTS.deleteBasketItem(userId, e.target.value),
-      API.getHeaders()
-    )
-      .then(() => {
-        setIsUpdated(true);
-      })
-      .catch((e) => console.log(e))
-  };
+  const deleteItemFromBasket = async (e) => {
+    try {
+      await API.DELETE(
+        API.ENDPOINTS.deleteBasketItem(userId, e.target.value),
+        API.getHeaders()
+      )
+      setIsUpdated(true)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const getTotal = basket?.reduce((acc, item) => {
-    return acc + item.price;
+    return acc + item.price
   }, 0)
 
   return (

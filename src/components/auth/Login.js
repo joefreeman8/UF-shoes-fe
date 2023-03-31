@@ -20,17 +20,15 @@ export default function Login() {
   })
   const [error] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    API.POST(API.ENDPOINTS.login, formFields)
-      .then(({ data }) => {
-        // console.log(data)
-        AUTH.setToken(data.token)
-        navigate('/shop')
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    try {
+      const { data } = await API.POST(API.ENDPOINTS.login, formFields)
+      AUTH.setToken(data.token)
+      navigate('/shop')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const handleChange = (e) => {

@@ -28,7 +28,6 @@ export default function Register() {
     e.preventDefault()
     try {
       await API.POST(API.ENDPOINTS.register, formFields)
-
       const loginData = await API.POST(
         API.ENDPOINTS.login,
         {
@@ -36,10 +35,8 @@ export default function Register() {
           password: formFields.password
         }
       )
-
       AUTH.setToken(loginData.data.token)
       navigate('/shop')
-
     } catch (err) {
       console.log(err)
     }

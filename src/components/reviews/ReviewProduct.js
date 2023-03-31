@@ -17,17 +17,18 @@ export default function ReviewProduct() {
     setTextValue(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    API.POST(API.ENDPOINTS.createReview(id),
-      { text: textValue, rating: rating },
-      API.getHeaders()
-    )
-      .then(({ data }) => {
-        console.log(`Review given to ${data.name}`)
-        navigate(`/shop/${id}`)
-      })
-      .catch((e) => console.log(e))
+    try {
+      const { data } = await API.POST(API.ENDPOINTS.createReview(id),
+        { text: textValue, rating: rating },
+        API.getHeaders()
+      )
+      console.log(`Review given to ${data.name}`)
+      navigate(`/shop/${id}`)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (

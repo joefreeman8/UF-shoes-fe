@@ -28,30 +28,32 @@ export default function ReviewCard({
   const toggleEditMode = () => setIsEditMode(!isEditMode)
   const handleReviewTextChange = (e) => setReviewText(e.target.value)
 
-  const saveEditChanges = () => {
-    if (text !== reviewText || rating !== reviewRating) {
-      API.PUT(
-        API.ENDPOINTS.singleReview(productId, reviewId),
-        { text: reviewText, rating: reviewRating },
-        API.getHeaders()
-      )
-        .then(() => {
-          toggleEditMode()
-          setIsUpdated(true)
-        })
-        .catch((e) => console.log(e))
+  const saveEditChanges = async () => {
+    try {
+      if (text !== reviewText || rating !== reviewRating) {
+        await API.PUT(
+          API.ENDPOINTS.singleReview(productId, reviewId),
+          { text: reviewText, rating: reviewRating },
+          API.getHeaders()
+        )
+        toggleEditMode()
+        setIsUpdated(true)
+      }
+    } catch (e) {
+      console.log(e)
     }
   }
 
-  const deleteReview = () => {
-    API.DELETE(
-      API.ENDPOINTS.singleReview(productId, reviewId),
-      API.getHeaders()
-    )
-      .then(() => {
-        setIsUpdated(true)
-      })
-      .catch((e) => console.log(e))
+  const deleteReview = async () => {
+    try {
+      await API.DELETE(
+        API.ENDPOINTS.singleReview(productId, reviewId),
+        API.getHeaders()
+      )
+      setIsUpdated(true)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const Rating = () =>

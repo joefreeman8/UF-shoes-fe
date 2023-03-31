@@ -46,15 +46,17 @@ function ProductShow() {
   }, [singleProduct])
 
 
-  const toggleBasket = () => {
-    API.POST(API.ENDPOINTS.toggleBasketItems(id),
-      {},
-      API.getHeaders(),
-    )
-      .then(({ data }) => {
-        const userBasket = data.likedBy.includes(AUTH.getPayload().userId)
-        setIsAddedToBasket(userBasket)
-      })
+  const toggleBasket = async () => {
+    try {
+      const { data } = await API.POST(API.ENDPOINTS.toggleBasketItems(id),
+        {},
+        API.getHeaders(),
+      )
+      const userBasket = data.likedBy.includes(AUTH.getPayload().userId)
+      setIsAddedToBasket(userBasket)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const loginToReviewOrBuy = () => navigate('/login')
