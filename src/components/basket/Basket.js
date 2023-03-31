@@ -1,14 +1,14 @@
-import { Box, Button, Card, Container, Grid, Typography, CardMedia, CardContent } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { API } from "../lib/api";
+import { Box, Button, Card, Container, Grid, Typography, CardMedia, CardContent } from "@mui/material"
+import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import { API } from "../lib/api"
 
-import '../../styles/Basket.scss';
+import '../../styles/Basket.scss'
 
 function Basket() {
-  const [basket, setBasket] = useState([]);
-  const [isUpdated, setIsUpdated] = useState(false);
-  const { userId } = useParams();
+  const [basket, setBasket] = useState([])
+  const [isUpdated, setIsUpdated] = useState(false)
+  const { userId } = useParams()
 
   useEffect(() => {
     const getData = async () => {
@@ -17,18 +17,18 @@ function Basket() {
           API.ENDPOINTS.basketItems(userId),
           API.getHeaders()
         );
-        setBasket(data.basket);
-        console.log(data.basket);
+        setBasket(data.basket)
+        console.log(data.basket)
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     };
-    getData();
-    setIsUpdated(false);
-  }, [userId, isUpdated]);
+    getData()
+    setIsUpdated(false)
+  }, [userId, isUpdated])
 
   const deleteItemFromBasket = (e) => {
-    console.log("target ->", e.target.value);
+    console.log("target ->", e.target.value)
 
     API.DELETE(
       API.ENDPOINTS.deleteBasketItem(userId, e.target.value),
@@ -37,12 +37,12 @@ function Basket() {
       .then(() => {
         setIsUpdated(true);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
   };
 
   const getTotal = basket?.reduce((acc, item) => {
     return acc + item.price;
-  }, 0);
+  }, 0)
 
   return (
     <>
@@ -67,7 +67,7 @@ function Basket() {
                         sx={{ width: 100, height: 100 }}
                       />
                       <CardContent sx={{ flex: 1, display: "flex", flexDirection: "column", pl: 2 }}>
-                        <Typography component="div" sx={{ mb: 1 }}>
+                        <Typography component="div">
                           <Box fontWeight="bold">{item.name}</Box>
                         </Typography>
                         <Typography variant="subtitle1" color="text.secondary" sx={{ flexGrow: 1 }}>
@@ -87,7 +87,15 @@ function Basket() {
                   </Grid>
                 ))}
               </Grid>
-              <Box sx={{ mt: 3, display: "flex", justifyContent: "center", alignItems: 'center', flexDirection: "column" }}>
+              <Box
+                sx={{
+                  mt: 3,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: 'center',
+                  flexDirection: "column"
+                }}
+              >
                 <Typography fontWeight="bold">
                   Total: £{getTotal.toFixed(2)}
                 </Typography>
@@ -107,7 +115,7 @@ function Basket() {
         <Container className="basket-container">
           <Box className="fail-box" sx={{ textAlign: "center" }}>
             <Typography fontWeight="bold" variant="h5" sx={{ mb: 2 }}>
-              Your cart is currently empty.
+              Your basket is currently empty.
             </Typography>
             <Typography variant="subtitle1" sx={{ mb: 3 }}>
               Head back to the <Link to="/shop">shop</Link> and start adding
