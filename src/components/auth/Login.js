@@ -88,6 +88,7 @@ export default function Login() {
             <Button
               variant="contained"
               type='submit'
+              color='success'
               sx={{ width: "80%", mt: 1.2 }}
             >
               Login

@@ -130,7 +130,7 @@ function ProductShow() {
               </>
             ) : (
               <>
-                <Button size="small" onClick={loginToReviewOrBuy}>review</Button>
+                <Button size="small" color='success' onClick={loginToReviewOrBuy}>review</Button>
                 <Button size="small" variant="contained" color="success" onClick={loginToReviewOrBuy}>Add to basket</Button>
               </>
             )}

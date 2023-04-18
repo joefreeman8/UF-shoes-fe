@@ -126,7 +126,7 @@ export default function Register() {
             alignItems: 'center',
             alignContent: 'center',
           }}>
-            <Button variant="contained" type='submit'
+            <Button variant="contained" type='submit' color='success'
               sx={{ width: "100%", mt: 1.2 }}>
               CREATE ACCOUNT</Button>
           </Box>

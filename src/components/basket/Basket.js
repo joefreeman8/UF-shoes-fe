@@ -42,6 +42,13 @@ function Basket() {
     return acc + item.price
   }, 0)
 
+  const handleCheckout = () => {
+    window.confirm('Thank you for purchasing these shoes')
+    if (basket.length > 0) {
+      basket.length.pop()
+    }
+  }
+
   return (
     <>
       {!!basket?.length ? (
@@ -102,6 +109,7 @@ function Basket() {
                   color="success"
                   size="large"
                   sx={{ mt: 2 }}
+                  onClick={handleCheckout}
                 >
                   Checkout
                 </Button>

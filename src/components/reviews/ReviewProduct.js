@@ -34,7 +34,7 @@ export default function ReviewProduct() {
   return (
     <Container className='review-container'>
       <form onSubmit={handleSubmit}>
-        <Box>
+        <Box sx={{ mb: 2 }}>
           <TextareaAutosize
             name='text'
             value={textValue}
@@ -48,7 +48,7 @@ export default function ReviewProduct() {
           rating={rating}
           setRating={setRating}
         />
-        <Button type="submit">submit review</Button>
+        <Button sx={{ mt: 2 }} color="success" variant="contained" type="submit">submit review</Button>
       </form>
     </Container>
   )
