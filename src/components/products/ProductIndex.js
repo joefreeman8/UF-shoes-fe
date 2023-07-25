@@ -29,7 +29,7 @@ function ProductIndex() {
     setFilters({ ...filters, brand: e.target.value })
   }
 
-  // this useEffect is waiting an listening for a change in the filtering. 
+  // this useEffect is waiting and listening for a change in the filtering. 
   useEffect(() => {
     if (products.length) {
       setFilteredBrands(products.filter(product => {
