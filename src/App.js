@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Nav from './components/common/Nav';
-import Home from './components/common/Home'
-import ProductIndex from './components/products/ProductIndex';
-import ProductShow from './components/products/ProductShow';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import ReviewProduct from './components/reviews/ReviewProduct';
-import Basket from './components/basket/Basket';
+import Nav from './components/common/Nav.js';
+import Home from './components/common/Home.js'
+import ProductIndex from './components/products/ProductIndex.js';
+import ProductShow from './components/products/ProductShow.js';
+import Register from './components/auth/Register.js';
+import Login from './components/auth/Login.js';
+import ReviewProduct from './components/reviews/ReviewProduct.js';
+import Basket from './components/basket/Basket.js';
 
 import './styles/App.css'
 

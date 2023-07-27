@@ -38,7 +38,7 @@ export default function ReviewProduct() {
           <TextareaAutosize
             name='text'
             value={textValue}
-            placholder="Leave your review"
+            placeholder="Leave your review"
             onChange={handleChange}
             minRows={10}
             style={{ width: 500 }}

@@ -1,18 +1,19 @@
 import axios from 'axios'
 import { AUTH } from './auth'
+import { baseUrl } from '../../config'
 
 const ENDPOINTS = {
-  allProducts: '/api/shop',
-  singleProduct: (id) => `/api/shop/${id}`,
-  createReview: (id) => `/api/shop/${id}/reviews`,
-  singleReview: (productId, reviewId) => `/api/shop/${productId}/reviews/${reviewId}`,
+  allProducts: `${baseUrl}/shop`,
+  singleProduct: (id) => `${baseUrl}/shop/${id}`,
+  createReview: (id) => `${baseUrl}/shop/${id}/reviews`,
+  singleReview: (productId, reviewId) => `${baseUrl}/shop/${productId}/reviews/${reviewId}`,
 
-  register: '/api/register',
-  login: '/api/login',
+  register: `${baseUrl}/register`,
+  login: `${baseUrl}/login`,
 
-  toggleBasketItems: (id) => `/api/shop/${id}/basket`,
-  basketItems: (userId) => `/api/basket/${userId}`,
-  deleteBasketItem: (userId, productId) => `/api/basket/${userId}/${productId}`
+  toggleBasketItems: (id) => `${baseUrl}/shop/${id}/basket`,
+  basketItems: (userId) => `${baseUrl}/basket/${userId}`,
+  deleteBasketItem: (userId, productId) => `${baseUrl}/basket/${userId}/${productId}`
 }
 
 

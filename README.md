@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Project 3 - Urban Footwear Co.
+## Overview
+Here I have built a fullstack MERN app for a footwear e-commerce site. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Technical Requirements
+* Use an Express API to serve your data from a Mongo database
+* Consume your API with a separate frontend built with React
+* Have a complete product with multiple relationships and CRUD functionality and have multiple models
 
-## Available Scripts
 
-In the project directory, you can run:
+## Built With
+* Express
+* Node.js
+* Mongoose
+* MongoDB
+* Insomnia
+* React.js
+* JSX
+* CSS
+* SASS
+* MUI Framework
+* Axios
+* React-Router-DOM
+* Git
+* GitHub
 
-### `npm start`
+## Key Features
+* User can register and log in
+* Logged in users have the ability to leave a review & rating.
+* Reviews can be edited after submission and also deleted
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Stretch Goals
+* Superuser/admin has the ability to delete any reviews, however they cannot edit other users reviews.
+* Users can add items to basket
+* Basket progresses to a checkout page
 
-### `npm test`
+## Deployed Version
+<!-- [View the deployed version of the app](https://sniff.netlify.app/) -->
+<!-- ![Screen Grab of home page](./src/assets/homePage.png) -->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Planning
+I initially hadn't planned to make an project which I was going to deploy, this was just meant to be a small play around to keep me actively learning, but as I built and changed direction from a full clothing e-commerce site to a shoes only one I gained momentum and built my first full stack solo application. Having a plan would have certainly made life easier at various points, as I would have already thought about which directions I wanted to go in and potential issues. (Next project is going to have an actual plan).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Challenges 
+One of the biggest challenges was deciding how I wanted my project to look, I ultimately decided on doing a semi-clone of [Urban Industry](https://urbanindustry.co.uk), which really helped my inspiration for styling. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Working out the conditional rendering so Admin user can delete reviews but they cannot edit. I successfully achieved it with the JSX code block below: 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+(AUTH.isOwner(addedBy._id) || AUTH.getPayload().isAdmin) && (
+  <CardActions>
+    {AUTH.isOwner(addedBy._id) && (
+      <Button color='success' onClick={toggleEditMode}>
+        {isEditMode ? 'cancel' : 'edit review'}
+      </Button>
+    )}
+    <Button color='success' onClick={isEditMode ? saveEditChanges : deleteReview}>
+      {isEditMode ? 'save changes' : 'delete review'}
+    </Button>
+  </CardActions>
+)
+```
 
-### `npm run eject`
+## Bugs 
+The one bug I am currently aware of is after you add an item to the basket, if you navigate away from that items show/detail page and then navigate back, the button defaults back to 'add item to basket' again, even though the basket is already populated with said item. I haven't yet managed to work out why this happens. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Future improvement
+* Fix bug issue mentioned above
+* Add shopify/checkout component 
+* Add error handling 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Wins & Key Learnings
+* I really enjoyed the process of making a full app alone, previous fulltstack apps had been made as part of a team and doing the journey alone really allowed me to understand my code better
+* The working star system for ratings 
+* Conditional rendering for buttons when leaving reviews, and admin privileges 
+* Planning will make life so much easier! Even now when creating this readme I have located missing parts of my project, such as error handling on the client side! (face palm x 3)
