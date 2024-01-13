@@ -36,8 +36,9 @@ Here I have built a fullstack MERN app for a footwear e-commerce site.
 * Basket progresses to a checkout page
 
 ## Deployed Version
-<!-- [View the deployed version of the app](https://sniff.netlify.app/) -->
-<!-- ![Screen Grab of home page](./src/assets/homePage.png) -->
+[View the deployed version of the app](https://urban-footwear.netlify.app/)
+
+![Screen Grab of App](./src/assets/viewShoePage.png)
 
 
 ## Planning
