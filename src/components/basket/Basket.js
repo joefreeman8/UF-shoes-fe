@@ -60,7 +60,7 @@ function Basket() {
             Your Basket
           </h1>
           <Box sx={{ display: "flex", justifyContent: "center" }} >
-            <Card sx={{ p: 3, width: "50%", mt: 10, }}>
+            <Card sx={{ p: 3, width: { xs: "80%", sm: "70%", md: "50%" }, mt: 10 }}>
               <Grid container spacing={3}>
                 {basket?.map((item) => (
                   <Grid item xs={12} key={item._id}>
