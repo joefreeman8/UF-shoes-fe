@@ -75,4 +75,4 @@ The one bug I am currently aware of is after you add an item to the basket, if y
 * I really enjoyed the process of making a full app alone, previous fulltstack apps had been made as part of a team and doing the journey alone really allowed me to understand my code better
 * The working star system for ratings 
 * Conditional rendering for buttons when leaving reviews, and admin privileges 
-* Planning will make life so much easier! Even now when creating this readme I have located missing parts of my project, such as error handling on the client side! (face palm x 3)
+* There is more I'd like to add: such as error handling, and a revamp of the styling too!
