@@ -1,9 +1,13 @@
-import { createProxyMiddleware } from 'http-proxy-middleware'
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
-export default function (app) {
+module.exports = function (app) {
   app.use(
-    createProxyMiddleware('/api',
-      { target: 'http://localhost:4000' }
-    )
+    '/api',
+    createProxyMiddleware({
+      target: 'http://localhost:4000',
+      changeOrigin: true,
+    })
   )
 }
+
+// ! KEEP THIS FILE AS COMMON.JS, ES6 is not supported in this file 
