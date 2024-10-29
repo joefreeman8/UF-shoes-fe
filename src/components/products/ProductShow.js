@@ -39,6 +39,8 @@ function ProductShow() {
 
   const goToIndex = () => navigate('/shop')
 
+
+  // useMemo to cache the reviews - this would speed up performance if there were lots of reviews (likely on a real e-commerce site)
   const userHasReviewed = useMemo(() => {
     return singleProduct?.reviews
       .map((review) => review.addedBy._id)
