@@ -18,7 +18,7 @@ export default function Login() {
     email: '',
     password: '',
   })
-  const [error] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -28,6 +28,7 @@ export default function Login() {
       navigate('/shop')
     } catch (e) {
       console.log(e)
+      setIsError(true)
     }
   }
 
@@ -71,7 +72,7 @@ export default function Login() {
               type='email'
               value={formFields.email}
               onChange={handleChange}
-              error={error.email}
+              // error={error.email}
               sx={{ width: '80%', mb: 1.2 }}
             />
             <TextField
@@ -82,9 +83,20 @@ export default function Login() {
               type='password'
               value={formFields.password}
               onChange={handleChange}
-              error={error.password}
+              // error={error.password}
               sx={{ width: "80%", mb: 1.2 }}
             />
+            {isError && (
+              <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignContent: 'center',
+                color: 'red'
+              }}>
+                <p><strong>Email or Password incorrect.</strong></p>
+              </Box>
+            )}
             <Button
               variant="contained"
               type='submit'
