@@ -67,6 +67,9 @@ Working out the conditional rendering so Admin user can delete reviews but they 
 ## Bugs 
 The one bug I am currently aware of is after you add an item to the basket, if you navigate away from that items show/detail page and then navigate back, the button defaults back to 'add item to basket' again, even though the basket is already populated with said item. I haven't yet managed to work out why this happens. 
 
+### Bug solved
+I was always setting the state to check if the product is in my basket to false when rendering the page, and not checking if this is still correct once the API call to get the product from the DB comes back. 
+
 ## Future improvement
 * Fix bug issue mentioned above
 * Add shopify/checkout component 
