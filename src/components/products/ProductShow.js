@@ -16,7 +16,7 @@ import ReviewCard from "../reviews/ReviewCard"
 import ProductRatings from "./ProductRatings"
 
 import '../../styles/ProductShow.scss'
-import { useCallback } from "react"
+
 
 function ProductShow() {
   const navigate = useNavigate()
@@ -27,31 +27,21 @@ function ProductShow() {
 
   const [isAddedToBasket, setIsAddedToBasket] = useState(false)
 
-  const checkBasketStatus = useCallback(async () => {
-    try {
-      const { data } = await API.GET(API.ENDPOINTS.singleProduct(id), API.getHeaders())
-      const userBasket = data.basket?.includes(AUTH.getPayload().userId)
-      setIsAddedToBasket(!!userBasket) // Use !! to ensure boolean value
-    } catch (err) {
-      console.log(err)
-    }
-  }, [id])
-
-
 
   useEffect(() => {
     API.GET(API.ENDPOINTS.singleProduct(id))
       .then(({ data }) => {
         setSingleProduct(data)
         if (isLoggedIn) {
-          checkBasketStatus()
+          const userBasket = data.basket?.includes(AUTH.getPayload().userId)
+          setIsAddedToBasket(!!userBasket)
         }
       })
       .catch(({ message, response }) => {
         console.log(message, response)
       })
     setIsUpdated(false)
-  }, [id, isUpdated, isLoggedIn, checkBasketStatus])
+  }, [id, isUpdated, isLoggedIn])
 
 
   const goToIndex = () => navigate('/shop')
