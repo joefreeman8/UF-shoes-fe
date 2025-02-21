@@ -12,9 +12,8 @@ function Basket() {
   const { userId } = useParams()
   const user = AUTH.getPayload()
 
-  const capitaliseUsername = user.username.charAt(0).toUpperCase()
-  const remainingLetters = user.username.slice(1)
-  const username = capitaliseUsername + remainingLetters
+  const capitaliseUsername = user.username.charAt(0).toUpperCase() + user.username.slice(1)
+
 
 
   useEffect(() => {
@@ -72,7 +71,7 @@ function Basket() {
           sx={{ mt: 5 }}
         >
           <h1 sx={{ mt: 3 }}>
-            {username}'s basket:
+            {capitaliseUsername}'s basket:
           </h1>
           <Box sx={{ display: "flex", justifyContent: "center" }} >
             <Card sx={{ p: 3, width: { xs: "80%", sm: "70%", md: "50%" }, mt: 10 }}>
