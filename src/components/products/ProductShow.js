@@ -71,7 +71,7 @@ function ProductShow() {
         {},
         API.getHeaders(),
       )
-      console.log(data)
+
       const userBasket = data.basket.includes(AUTH.getPayload().userId)
       setIsAddedToBasket(!!userBasket)
     } catch (err) {
