@@ -49,10 +49,18 @@ function Basket() {
     return acc + item.price
   }, 0)
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     window.confirm('Thank you for purchasing these shoes')
-    if (basket.length > 0) {
-      basket.length.pop()
+    try {
+      if (basket.length > 0) {
+        await API.DELETE(
+          API.ENDPOINTS.clearBasket(),
+          API.getHeaders()
+        )
+        setBasket([])
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 

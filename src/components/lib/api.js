@@ -13,7 +13,8 @@ const ENDPOINTS = {
 
   toggleBasketItems: (id) => `${baseUrl}/shop/${id}/basket`,
   basketItems: (userId) => `${baseUrl}/basket/${userId}`,
-  deleteBasketItem: (userId, productId) => `${baseUrl}/basket/${userId}/${productId}`
+  deleteBasketItem: (userId, productId) => `${baseUrl}/basket/${userId}/${productId}`,
+  clearBasket: () => `${baseUrl}/basket`
 }
 
 
