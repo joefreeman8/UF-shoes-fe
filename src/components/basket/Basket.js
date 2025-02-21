@@ -2,6 +2,7 @@ import { Box, Button, Card, Container, Grid, Typography, CardMedia, CardContent 
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { API } from "../lib/api"
+import { AUTH } from "../lib/auth"
 
 import '../../styles/Basket.scss'
 
@@ -9,6 +10,12 @@ function Basket() {
   const [basket, setBasket] = useState([])
   const [isUpdated, setIsUpdated] = useState(false)
   const { userId } = useParams()
+  const user = AUTH.getPayload()
+
+  const capitaliseUsername = user.username.charAt(0).toUpperCase()
+  const remainingLetters = user.username.slice(1)
+  const username = capitaliseUsername + remainingLetters
+
 
   useEffect(() => {
     const getData = async () => {
@@ -57,7 +64,7 @@ function Basket() {
           sx={{ mt: 5 }}
         >
           <h1 sx={{ mt: 3 }}>
-            Your Basket
+            {username}'s basket:
           </h1>
           <Box sx={{ display: "flex", justifyContent: "center" }} >
             <Card sx={{ p: 3, width: { xs: "80%", sm: "70%", md: "50%" }, mt: 10 }}>

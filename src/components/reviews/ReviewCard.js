@@ -102,11 +102,11 @@ export default function ReviewCard({
         (AUTH.isOwner(addedBy._id) || AUTH.getPayload().isAdmin) && (
           <CardActions>
             {AUTH.isOwner(addedBy._id) && (
-              <Button color='success' onClick={toggleEditMode}>
+              <Button color={isEditMode ? 'secondary' : 'success'} onClick={toggleEditMode}>
                 {isEditMode ? 'cancel' : 'edit review'}
               </Button>
             )}
-            <Button color='success' onClick={isEditMode ? saveEditChanges : deleteReview}>
+            <Button color={isEditMode ? 'success' : 'secondary'} onClick={isEditMode ? saveEditChanges : deleteReview}>
               {isEditMode ? 'save changes' : 'delete review'}
             </Button>
           </CardActions>

@@ -124,8 +124,11 @@ function ProductShow() {
                 <Button
                   size="small"
                   variant="contained"
-                  color="success"
+                  color={!isAddedToBasket ? "success" : "secondary"}
                   onClick={toggleBasket}
+                  sx={{
+                    width: 150
+                  }}
                 >
                   {isAddedToBasket ? 'Remove basket' : 'Add to basket'}
                 </Button>
