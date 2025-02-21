@@ -16,6 +16,7 @@ import ReviewCard from "../reviews/ReviewCard"
 import ProductRatings from "./ProductRatings"
 
 import '../../styles/ProductShow.scss'
+import { useCallback } from "react"
 
 function ProductShow() {
   const navigate = useNavigate()
@@ -26,20 +27,36 @@ function ProductShow() {
 
   const [isAddedToBasket, setIsAddedToBasket] = useState(false)
 
+  const checkBasketStatus = useCallback(async () => {
+    try {
+      const { data } = await API.GET(API.ENDPOINTS.singleProduct(id), API.getHeaders())
+      const userBasket = data.basket?.includes(AUTH.getPayload().userId)
+      setIsAddedToBasket(!!userBasket) // Use !! to ensure boolean value
+    } catch (err) {
+      console.log(err)
+    }
+  }, [id])
+
+
+
   useEffect(() => {
     API.GET(API.ENDPOINTS.singleProduct(id))
       .then(({ data }) => {
         setSingleProduct(data)
+        if (isLoggedIn) {
+          checkBasketStatus()
+        }
       })
       .catch(({ message, response }) => {
         console.log(message, response)
       })
     setIsUpdated(false)
-  }, [id, isUpdated])
+  }, [id, isUpdated, isLoggedIn, checkBasketStatus])
+
 
   const goToIndex = () => navigate('/shop')
 
-
+  console.log(singleProduct)
   // useMemo to cache the reviews - this would speed up performance if there were lots of reviews (likely on a real e-commerce site)
   const userHasReviewed = useMemo(() => {
     return singleProduct?.reviews
@@ -50,16 +67,19 @@ function ProductShow() {
 
   const toggleBasket = async () => {
     try {
-      const { data } = await API.POST(API.ENDPOINTS.toggleBasketItems(id),
+      const { data } = await API.PUT(API.ENDPOINTS.toggleBasketItems(id),
         {},
         API.getHeaders(),
       )
-      const userBasket = data.likedBy.includes(AUTH.getPayload().userId)
-      setIsAddedToBasket(userBasket)
+      console.log(data)
+      const userBasket = data.basket.includes(AUTH.getPayload().userId)
+      setIsAddedToBasket(!!userBasket)
     } catch (err) {
       console.log(err)
+    } finally {
     }
   }
+
 
   const loginToReviewOrBuy = () => navigate('/login')
 
