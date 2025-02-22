@@ -17,7 +17,7 @@ export default function Register() {
     password: '',
     passwordConfirmation: ''
   })
-  const [isError, setIsError] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleChange = (e) => {
     setFormFields({ ...formFields, [e.target.name]: e.target.value })
@@ -39,7 +39,7 @@ export default function Register() {
       navigate('/shop')
     } catch (err) {
       console.log(err)
-      setIsError(true)
+      setError(err.response.data.errors)
     }
   }
 
@@ -75,7 +75,7 @@ export default function Register() {
               required={true}
               value={formFields.username}
               onChange={handleChange}
-              // error={error.username}
+              error={!!error?.username}
               sx={{ width: "100%", mb: 1.2 }}
             />
           </Box>
@@ -89,7 +89,7 @@ export default function Register() {
               required={true}
               value={formFields.email}
               onChange={handleChange}
-              // error={error.email}
+              error={!!error?.email}
               sx={{ width: "100%", mb: 1.2 }}
             />
           </Box>
@@ -103,7 +103,7 @@ export default function Register() {
               required={true}
               value={formFields.password}
               onChange={handleChange}
-              // error={error.password}
+              error={!!error?.password}
               sx={{ width: "100%", mb: 1.2 }}
             />
           </Box>
@@ -117,11 +117,11 @@ export default function Register() {
               required={true}
               value={formFields.passwordConfirmation}
               onChange={handleChange}
-              // error={error.passwordConfirmation}
+              error={!!error?.passwordConfirmation}
               sx={{ width: "100%", mb: 1.2 }}
             />
           </Box>
-          {isError && (
+          {error && (
             <Box sx={{
               display: 'flex',
               justifyContent: 'center',
@@ -129,7 +129,7 @@ export default function Register() {
               alignContent: 'center',
               color: 'red'
             }}>
-              <p><strong>Credentials did not work, please try again.</strong></p>
+              <p><strong>{Object.values(error)[0]}</strong></p>
             </Box>
           )}
           <Box sx={{
